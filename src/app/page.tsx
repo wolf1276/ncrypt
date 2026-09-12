@@ -16,7 +16,12 @@ const networks = [
 export default function Home() {
   return <main className={styles.page}>
     <div className={styles.scan} aria-hidden="true" />
-    <header className={styles.header}><a className={styles.brand} href="#top" aria-label="Ecdat home"><span className={styles.logoMark} role="img" aria-label="Ecdat" /></a></header>
+    <header className={styles.header}>
+      <a className={styles.brand} href="#top" aria-label="Ecdat home"><span className={styles.logoMark} role="img" aria-label="Ecdat" /></a>
+      <nav className={styles.nav} aria-label="Primary navigation">
+        <a className={styles.earlyAccess} href="#early-access">Get early access <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
     <section className={styles.hero} id="top" aria-labelledby="headline">
       <h1 id="headline" aria-label="Find it. Understand it. Migrate it.">
         {[175, 365, 550].map((top) => (
@@ -27,7 +32,7 @@ export default function Home() {
       </h1>
     </section>
     <footer className={styles.networkFooter}>
-      <p>BUILT FOR THE MULTI-CHAIN WORLD</p>
+      <p>TRUSTED BY ECOSYSTEM</p>
       <div className={styles.rule} />
       <div className={styles.ticker} aria-label="Blockchain networks">
         <div className={styles.tickerTrack}>
