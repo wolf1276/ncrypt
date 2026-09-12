@@ -1,10 +1,17 @@
+import Image from "next/image";
 import styles from "./page.module.css";
 
-const networks = [["solana", "Solana"], ["ethereum", "Ethereum"], ["stellar", "Stellar"], ["avalanche", "Avalanche"], ["sui", "Sui"], ["cardano", "Cardano"], ["polygon", "Polygon"]];
-
-function Mark({ name }: { name: string }) {
-  return <span className={`${styles.mark} ${styles[name]}`} aria-hidden="true" />;
-}
+const networks = [
+  { name: "solana", label: "Solana", asset: "/chains/solana.svg" },
+  { name: "stellar", label: "Stellar", asset: "/chains/stellar.png" },
+  { name: "avalanche", label: "Avalanche", asset: "/chains/avalanche.svg" },
+  { name: "sui", label: "Sui", asset: "/chains/sui.svg" },
+  { name: "cardano", label: "Cardano", asset: "/chains/cardano.svg" },
+  { name: "bitcoin", label: "Bitcoin", asset: "/chains/bitcoin.png" },
+  { name: "polkadot", label: "Polkadot", asset: "/chains/polkadot.svg" },
+  { name: "arbitrum", label: "Arbitrum", asset: "/chains/arbitrum.svg" },
+  { name: "optimism", label: "Optimism", asset: "/chains/optimism.svg" },
+];
 
 export default function Home() {
   return <main className={styles.page}>
@@ -19,6 +26,35 @@ export default function Home() {
         ))}
       </h1>
     </section>
-    <footer className={styles.networkFooter}><p>Built for the multi-chain world</p><div className={styles.rule} /><div className={styles.ticker} aria-label="Supported blockchain networks"><div className={styles.tickerTrack}>{[...networks, ...networks].map(([name, label], index) => <div className={styles.network} key={`${name}-${index}`}><Mark name={name} /><span>{label}</span><b aria-hidden="true" /></div>)}</div></div></footer>
+    <footer className={styles.networkFooter}>
+      <p>BUILT FOR THE MULTI-CHAIN WORLD</p>
+      <div className={styles.rule} />
+      <div className={styles.ticker} aria-label="Blockchain networks">
+        <div className={styles.tickerTrack}>
+          {[0, 1].map((copyIndex) => (
+            <div className={styles.tickerGroup} aria-hidden={copyIndex === 1 ? true : undefined} key={copyIndex}>
+              {networks.map(({ name, label, asset }) => (
+                <div className={styles.network} data-chain={name} key={`${name}-${copyIndex}`}>
+                  <span className={styles.logoFrame}>
+                    <Image
+                      className={styles.chainLogo}
+                      src={asset}
+                      alt={copyIndex === 0 ? `${label} logo` : ""}
+                      width={30}
+                      height={30}
+                      loading="eager"
+                      unoptimized
+                      draggable={false}
+                    />
+                  </span>
+                  <span>{label}</span>
+                  <b aria-hidden="true" />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </footer>
   </main>;
 }
